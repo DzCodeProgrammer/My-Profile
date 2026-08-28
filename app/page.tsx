@@ -26,14 +26,14 @@ export default function Home() {
       </section>
 
       <section id="experience" className="journey section-shell">
-        <div className="section-label"><span>03</span> EXPERIENCE / JOURNEY</div><div className="section-head"><h2>The <em>Journey</em></h2><p>An honest, evolving record of learning and building. Verified milestones can be added as the story grows.</p></div>
+        <div className="section-label"><span>03</span> EXPERIENCE / JOURNEY</div><div className="section-head"><h2>The <em>Journey</em></h2><p>A living record of engineering practice: build, test, learn, and turn the result into a stronger system.</p></div>
         <div className="timeline">
-          {[["NOW","ENGINEERING","Building modern software systems and sharpening full-stack engineering practice."],["ONGOING","EXPERIMENTING","Exploring AI, computer vision, automation, and new forms of human-computer interaction."],["CONTINUOUS","LEARNING","Studying architecture, developer tooling, backend systems, and emerging technology."],["PLACEHOLDER","COLLABORATING","Add verified team, open-source, or community milestones here."]].map(([period,title,copy],i)=><article key={title}><span>0{i+1}</span><time>{period}</time><h3>{title}</h3><p>{copy}</p></article>)}
+          {[["NOW","ENGINEERING","Building modern software systems and sharpening full-stack engineering practice."],["ONGOING","EXPERIMENTING","Exploring AI, computer vision, automation, and new forms of human-computer interaction."],["CONTINUOUS","LEARNING","Studying architecture, developer tooling, backend systems, and emerging technology."],["OPEN","COLLABORATING","Available for focused collaborations where software, systems thinking, and ambitious ideas meet."]].map(([period,title,copy],i)=><article key={title}><span>0{i+1}</span><time>{period}</time><h3>{title}</h3><p>{copy}</p></article>)}
         </div>
       </section>
 
       <section id="projects" className="projects section-shell">
-        <div className="section-label"><span>04</span> PROJECTS / SELECTED WORK</div><div className="section-head"><h2>Selected <em>Work</em></h2><p>Systems, interfaces, and technical experiments. Items without verified public links are explicitly labeled.</p></div><ProjectGallery />
+        <div className="section-label"><span>04</span> PROJECTS / SELECTED WORK</div><div className="section-head"><h2>Selected <em>Work</em></h2><p>Three evolving project worlds—each with a distinct system, visual language, and technical direction.</p></div><ProjectGallery />
       </section>
 
       <section className="systems section-shell">

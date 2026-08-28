@@ -8,6 +8,9 @@ export type Project = {
   status: "Concept" | "Experiment";
   github?: string;
   accent: string;
+  image: string;
+  imageAlt: string;
+  signal: string;
   problem: string;
   solution: string;
   features: string[];
@@ -25,6 +28,9 @@ export const projects: Project[] = [
     technologies: ["Python", "FastAPI", "OpenCV", "MySQL", "Docker"],
     status: "Concept",
     accent: "#a855f7",
+    image: "/images/projects/smart-cctv.webp",
+    imageAlt: "Futuristic camera lens surrounded by optical rings and computer-vision tracking beams",
+    signal: "VISION PIPELINE / 01",
     problem: "Traditional camera systems capture footage, but turning visual input into useful, searchable events requires a reliable processing pipeline.",
     solution: "A modular concept architecture separates capture, API orchestration, recognition services, event storage, and the monitoring interface.",
     features: ["Video stream processing", "Recognition pipeline", "Event-based records", "Monitoring interface", "Container-ready services"],
@@ -36,10 +42,13 @@ export const projects: Project[] = [
     number: "02",
     title: "Full-Stack Systems",
     category: "Web Engineering · Product Systems",
-    description: "A collection placeholder for modern web applications built across product interfaces, APIs, authentication, and persistent data.",
+    description: "An evolving collection of modern web application patterns spanning product interfaces, APIs, authentication, and persistent data.",
     technologies: ["Next.js", "React", "Laravel", "Supabase", "Tailwind CSS"],
     status: "Experiment",
     accent: "#7c3aed",
+    image: "/images/projects/full-stack-systems.webp",
+    imageAlt: "Transparent layered server cube connected to application and data service nodes",
+    signal: "SERVICE GRAPH / 02",
     problem: "Useful products need the interface, application logic, and data layer to work as one dependable system.",
     solution: "Component-driven frontends connect to explicit service boundaries and maintainable data models.",
     features: ["Responsive UI", "Typed application flows", "API integration", "Authentication-ready patterns", "Relational data"],
@@ -55,6 +64,9 @@ export const projects: Project[] = [
     technologies: ["TypeScript", "Python", "Node.js", "OpenCV"],
     status: "Experiment",
     accent: "#6366f1",
+    image: "/images/projects/developer-experiments.webp",
+    imageAlt: "Robotic hand holding a luminous geometric seed among experimental microcontrollers",
+    signal: "PROTOTYPE FIELD / 03",
     problem: "Some of the most useful technical insights begin as small, focused experiments rather than finished products.",
     solution: "Short build cycles turn unfamiliar ideas into testable artifacts and reusable knowledge.",
     features: ["Focused prototypes", "Automation scripts", "Interface studies", "Technical notes", "Reusable findings"],

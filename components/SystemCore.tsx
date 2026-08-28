@@ -56,13 +56,21 @@ function CoreWorld() {
     <group rotation={[.08, -.08, -.03]}>
       {satellites.map((satellite, index) => <Line key={index} points={[[0, 0, 0], satellite.position]} color={satellite.color} lineWidth={.65} transparent opacity={.55} />)}
       <group ref={core}>
+        <mesh scale={.52}>
+          <icosahedronGeometry args={[1.05, 2]} />
+          <meshPhysicalMaterial color="#09070e" emissive="#4c1d95" emissiveIntensity={.58} metalness={.78} roughness={.17} clearcoat={1} />
+        </mesh>
         <mesh>
           <icosahedronGeometry args={[1.05, 1]} />
-          <meshPhysicalMaterial color="#0b0d13" metalness={.92} roughness={.13} clearcoat={1} clearcoatRoughness={.08} />
+          <meshPhysicalMaterial color="#10121a" metalness={.82} roughness={.16} clearcoat={1} clearcoatRoughness={.08} transparent opacity={.86} depthWrite={false} />
         </mesh>
         <mesh scale={1.012}>
           <icosahedronGeometry args={[1.05, 1]} />
           <meshBasicMaterial color="#afb2bd" wireframe transparent opacity={.7} />
+        </mesh>
+        <mesh scale={1.22} rotation={[.2, .4, 0]}>
+          <icosahedronGeometry args={[1.05, 0]} />
+          <meshBasicMaterial color="#8b5cf6" wireframe transparent opacity={.14} />
         </mesh>
       </group>
       <group ref={orbit}>

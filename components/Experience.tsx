@@ -19,6 +19,14 @@ export function Navigation() {
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
+  useEffect(() => {
+    if (!open) return;
+    const previousOverflow = document.body.style.overflow;
+    const closeOnEscape = (event: KeyboardEvent) => { if (event.key === "Escape") setOpen(false); };
+    document.body.style.overflow = "hidden";
+    document.addEventListener("keydown", closeOnEscape);
+    return () => { document.body.style.overflow = previousOverflow; document.removeEventListener("keydown", closeOnEscape); };
+  }, [open]);
   return (
     <>
       <header className={`nav-shell ${scrolled ? "is-scrolled" : ""}`}>
@@ -27,9 +35,9 @@ export function Navigation() {
           {nav.map(([label, target]) => <a key={target} href={`#${target}`}>{label}</a>)}
         </nav>
         <a className="nav-github" href="https://github.com/DzCodeProgrammer" target="_blank" rel="noreferrer">GITHUB <ArrowUpRight size={14} /></a>
-        <button className="menu-button" onClick={() => setOpen(true)} aria-label="Open menu"><Menu /></button>
+        <button className="menu-button" onClick={() => setOpen(true)} aria-label="Open menu" aria-expanded={open} aria-controls="mobile-navigation"><Menu /></button>
       </header>
-      <div className={`mobile-menu ${open ? "open" : ""}`} aria-hidden={!open}>
+      <div id="mobile-navigation" className={`mobile-menu ${open ? "open" : ""}`} aria-hidden={!open}>
         <button onClick={() => setOpen(false)} aria-label="Close menu"><X /></button>
         <nav>{nav.map(([label, target], i) => <a key={target} href={`#${target}`} onClick={() => setOpen(false)}><span>0{i + 1}</span>{label}</a>)}</nav>
       </div>
@@ -140,7 +148,7 @@ function HeroSystem() {
   }, []);
   return (
     <div ref={ref} className="hero-system" aria-label="Interactive orbital software system">
-      <Image src="/images/system-core-mobile.png" alt="Orbital software system core" fill preload quality={76} sizes="(max-width: 899px) 100vw, 55vw" className={`system-poster ${capable ? "is-hidden" : ""}`} />
+      <Image src="/images/system-core-mobile.webp" alt="Orbital software system core" fill priority quality={76} sizes="(max-width: 899px) 100vw, 55vw" className={`system-poster ${capable ? "is-hidden" : ""}`} />
       {capable && <SystemCore active={active} />}
       <div className="system-label label-front"><b>FRONTEND</b><span>UI/UX · REACT · THREE.JS</span></div>
       <div className="system-label label-ai"><b>AI SYSTEMS</b><span>VISION · LEARNING · AGENTS</span></div>
@@ -174,7 +182,21 @@ export function CodeTerminal() {
 }
 
 export function ProjectGallery() {
-  return <div className="project-gallery">{projects.map((project) => <article key={project.slug} className="project-row" data-cursor="VIEW PROJECT"><div className="project-no">{project.number}</div><div className="project-copy"><span>{project.category}</span><h3>{project.title}</h3><p>{project.description}</p><div className="project-meta"><span>STATUS / {project.status}</span><span>{project.technologies.join(" · ")}</span></div><Link href={`/projects/${project.slug}`}>View case study <ArrowUpRight /></Link></div><div className="project-visual" style={{ "--accent": project.accent } as React.CSSProperties}><div className="visual-grid"/><div className="visual-object"><i/><i/><i/></div><span>{project.title}</span></div></article>)}</div>;
+  return <div className="project-gallery">{projects.map((project) => <article key={project.slug} className="project-row" data-cursor="VIEW PROJECT">
+    <div className="project-copy">
+      <div className="project-kicker"><span>{project.number}</span><span>{project.category}</span></div>
+      <h3>{project.title}</h3>
+      <p>{project.description}</p>
+      <div className="project-meta"><span>STATUS / {project.status}</span><span>{project.technologies.join(" · ")}</span></div>
+      <Link href={`/projects/${project.slug}`}>View case study <ArrowUpRight /></Link>
+    </div>
+    <div className="project-visual" style={{ "--accent": project.accent } as React.CSSProperties}>
+      <Image src={project.image} alt={project.imageAlt} fill quality={75} sizes="(max-width: 900px) 100vw, 58vw" />
+      <div className="project-scan" aria-hidden="true" />
+      <div className="project-visual-top"><span>{project.signal}</span><span>{project.status}</span></div>
+      <div className="project-visual-bottom"><span>{project.title}</span><b>{project.number}</b></div>
+    </div>
+  </article>)}</div>;
 }
 
 export function Architecture() {
