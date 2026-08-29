@@ -57,8 +57,8 @@ function CoreWorld() {
   useFrame((state, delta) => {
     if (core.current) {
       core.current.rotation.y += delta * .1;
-      core.current.rotation.x = THREE.MathUtils.lerp(core.current.rotation.x, state.pointer.y * .12, .035);
-      core.current.rotation.z = THREE.MathUtils.lerp(core.current.rotation.z, -state.pointer.x * .08, .035);
+      core.current.rotation.x = THREE.MathUtils.damp(core.current.rotation.x, state.pointer.y * .12, 4.2, delta);
+      core.current.rotation.z = THREE.MathUtils.damp(core.current.rotation.z, -state.pointer.x * .08, 4.2, delta);
     }
     if (orbit.current) orbit.current.rotation.z -= delta * .035;
   });
@@ -111,7 +111,7 @@ export default function SystemCore({ active }: { active: boolean }) {
       <pointLight position={[-3, 1, 3]} intensity={7} distance={9} color="#6f4bd8" />
       <pointLight position={[3, -2, 3]} intensity={4} distance={8} color="#b9ff66" />
       <CoreWorld />
-      <OrbitControls enablePan={false} enableZoom={false} minPolarAngle={Math.PI / 2.5} maxPolarAngle={Math.PI / 1.65} autoRotate autoRotateSpeed={.28} enableDamping dampingFactor={.05} />
+      <OrbitControls enablePan={false} enableZoom={false} minPolarAngle={Math.PI / 2.5} maxPolarAngle={Math.PI / 1.65} autoRotate autoRotateSpeed={.24} enableDamping dampingFactor={.075} rotateSpeed={.58} />
     </Canvas>
   );
 }

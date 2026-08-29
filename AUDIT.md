@@ -48,9 +48,10 @@ The mobile document is 10,215 px because all two- and four-column groups stack i
 
 ## Motion and rendering strategy
 
-- GSAP ScrollTrigger reveals content once with a 28 px travel distance and `power3.out` easing.
+- GSAP ScrollTrigger batches reveals with a 14 px travel distance, 40 ms stagger, and `expo.out` easing.
 - Project images receive a subtle scroll-linked scale change; native page scrolling is preserved.
-- The Three.js world uses GSAP only for its initial scale and rotation entrance.
+- Route changes receive a short 480 ms transform/opacity transition for spatial continuity.
+- The Three.js world uses GSAP only for its initial scale and rotation entrance; pointer response uses frame-rate-independent damping.
 - `prefers-reduced-motion` disables GSAP transforms, animated contact geometry, and interactive WebGL.
 - `Save-Data` and viewports below 900 px receive the 1,400 × 1,750 WebP hero fallback.
 - The desktop canvas pauses outside the hero and when the document is hidden; DPR is capped at 1.5.
@@ -67,12 +68,13 @@ The mobile document is 10,215 px because all two- and four-column groups stack i
 - Terminal tabs: TypeScript selection changed the active file to `future.ts`.
 - Mobile navigation: open state changed to `aria-expanded="true"`; Escape returned it to `false`.
 - Image configuration: qualities `75` and `76` are configured; the previous Next Image quality warning is absent.
+- Console regression check: `THREE.Clock` and missing `data-scroll-behavior` warnings are absent on home-to-case-study navigation.
 - Identity scan: the current email is `dzikrijombang@gmail.com`; no old `dzcoding75` identity remains in application content.
 
 ## Known non-blocking diagnostics
 
-1. Three.js emits a `THREE.Clock` deprecation warning from the installed React Three Fiber dependency stack. It does not originate in portfolio code and does not affect rendering.
-2. Headless Chromium reports a GPU `ReadPixels` stall while screenshots are captured. This is specific to the screenshot path and is not a page runtime exception.
+1. Three.js remains pinned to `r182` because the latest React Three Fiber release still constructs the deprecated `Clock` API introduced in later Three.js releases. Re-test the current Three.js release after Fiber migrates to `Timer`.
+2. Headless Chromium may report a GPU `ReadPixels` stall while screenshots are captured. This is specific to the screenshot path and is not a page runtime exception.
 3. Automated browser checks cover layout and interactions, but a full assistive-technology matrix remains future work.
 4. Case studies still need verified repository links, live demos, outcomes, and measurements before they can be presented as shipped products.
 

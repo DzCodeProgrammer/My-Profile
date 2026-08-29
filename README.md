@@ -25,7 +25,8 @@ The visual system is intentionally progressive rather than all-or-nothing:
 4. Device pixel ratio is capped at `1.5`; geometry is procedural and no multi-megabyte GLB is required.
 5. Project artwork is pre-compressed WebP (approximately 74–89 KB per source image) and delivered through `next/image` with AVIF/WebP negotiation.
 6. Off-screen sections use `content-visibility` to avoid unnecessary layout and paint work.
-7. GSAP is limited to one global reveal controller and the dynamically loaded 3D scene; it is not used to hijack scrolling.
+7. GSAP is limited to short batched reveals, route continuity, project-image parallax, and the dynamically loaded 3D scene; it does not hijack native scrolling.
+8. Three.js is compatibility-pinned to `r182` while the latest React Three Fiber still depends on the subsequently deprecated `THREE.Clock` API.
 
 This produces a rich 3D impression while avoiding the cost of running several WebGL scenes or full-screen videos throughout the page.
 
@@ -73,6 +74,7 @@ app/
 components/
   Experience.tsx              Navigation and interactive UI modules
   MotionSystem.tsx            Reduced-motion-aware GSAP orchestration
+  RouteMotion.tsx             Lightweight route-entry continuity
   SystemCore.tsx              Lightweight procedural 3D scene
 lib/
   projects.ts                 Typed project content and artwork mapping

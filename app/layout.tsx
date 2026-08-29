@@ -1,4 +1,5 @@
 import type { Metadata, Viewport } from "next";
+import { RouteMotion } from "@/components/RouteMotion";
 import "./globals.css";
 import "./orbital.css";
 
@@ -28,8 +29,9 @@ const jsonLd = {
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en">
+    <html lang="en" data-scroll-behavior="smooth">
       <body>
+        <RouteMotion />
         {children}
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       </body>

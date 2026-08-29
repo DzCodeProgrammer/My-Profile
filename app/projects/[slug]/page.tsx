@@ -14,7 +14,7 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
   return <main className="case-study">
     <header className="case-nav"><Link href="/#projects"><ArrowLeft/> BACK TO WORK</Link><span>DZCODEPROGRAMMER</span></header>
     <section className="case-hero" style={{"--accent":project.accent} as React.CSSProperties}>
-      <Image src={project.image} alt={project.imageAlt} fill priority quality={75} sizes="100vw" className="case-hero-image" />
+      <Image src={project.image} alt={project.imageAlt} fill loading="eager" fetchPriority="high" quality={75} sizes="100vw" className="case-hero-image" />
       <div className="case-hero-shade" />
       <span>{project.number} / {project.status}</span><h1>{project.title}</h1><p>{project.category}</p>
       <div className="case-signal"><span>{project.signal}</span><strong>CASE STUDY</strong></div>

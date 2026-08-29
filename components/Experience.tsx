@@ -148,7 +148,7 @@ function HeroSystem() {
   }, []);
   return (
     <div ref={ref} className="hero-system" aria-label="Interactive orbital software system">
-      <Image src="/images/system-core-mobile.webp" alt="Orbital software system core" fill priority quality={76} sizes="(max-width: 899px) 100vw, 55vw" className={`system-poster ${capable ? "is-hidden" : ""}`} />
+      <Image src="/images/system-core-mobile.webp" alt="Orbital software system core" fill loading="eager" fetchPriority="high" quality={76} sizes="(max-width: 899px) 100vw, 55vw" className={`system-poster ${capable ? "is-hidden" : ""}`} />
       {capable && <SystemCore active={active} />}
       <div className="system-label label-front"><b>FRONTEND</b><span>UI/UX · REACT · THREE.JS</span></div>
       <div className="system-label label-ai"><b>AI SYSTEMS</b><span>VISION · LEARNING · AGENTS</span></div>
