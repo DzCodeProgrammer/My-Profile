@@ -2,7 +2,8 @@
 
 import { Line, OrbitControls, Sparkles } from "@react-three/drei";
 import { Canvas, useFrame } from "@react-three/fiber";
-import { useRef } from "react";
+import gsap from "gsap";
+import { useLayoutEffect, useRef } from "react";
 import * as THREE from "three";
 
 type Point = [number, number, number];
@@ -42,8 +43,17 @@ function Satellite({ position, color, shape, index }: (typeof satellites)[number
 }
 
 function CoreWorld() {
+  const world = useRef<THREE.Group>(null);
   const core = useRef<THREE.Group>(null);
   const orbit = useRef<THREE.Group>(null);
+  useLayoutEffect(() => {
+    if (!world.current || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    const scale = world.current.scale;
+    const rotation = world.current.rotation;
+    gsap.fromTo(scale, { x: .72, y: .72, z: .72 }, { x: 1, y: 1, z: 1, duration: 1.35, ease: "power3.out" });
+    gsap.fromTo(rotation, { x: .25, y: -.62, z: .12 }, { x: .08, y: -.08, z: -.03, duration: 1.55, ease: "power3.out" });
+    return () => { gsap.killTweensOf(scale); gsap.killTweensOf(rotation); };
+  }, []);
   useFrame((state, delta) => {
     if (core.current) {
       core.current.rotation.y += delta * .1;
@@ -53,7 +63,7 @@ function CoreWorld() {
     if (orbit.current) orbit.current.rotation.z -= delta * .035;
   });
   return (
-    <group rotation={[.08, -.08, -.03]}>
+    <group ref={world} rotation={[.08, -.08, -.03]}>
       {satellites.map((satellite, index) => <Line key={index} points={[[0, 0, 0], satellite.position]} color={satellite.color} lineWidth={.65} transparent opacity={.55} />)}
       <group ref={core}>
         <mesh scale={.52}>

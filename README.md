@@ -1,12 +1,14 @@
 # DzCodeProgrammer — Orbital Portfolio
 
-A high-performance personal portfolio for **Hadrian Galen Jave Dzikrillah**. The experience combines an interactive Three.js hero with image-led project worlds, technical case studies, and deliberate fallbacks for mobile, reduced-motion, and data-saving users.
+A high-performance personal portfolio for **Hadrian Galen Jave Dzikrillah**. The experience combines an interactive Three.js hero, restrained GSAP choreography, compact editorial sections, image-led project worlds, and deliberate fallbacks for mobile, reduced-motion, and data-saving users.
 
 ![Orbital portfolio hero](public/images/system-core-mobile.webp)
 
 ## What makes this portfolio different
 
 - A real, draggable WebGL system core built with React Three Fiber—no looping background video.
+- A compact 1,240 px editorial grid with readable type and substantially shorter section rhythm.
+- GSAP reveal, project-image parallax, and Three.js entrance choreography that respect reduced-motion preferences.
 - Three distinct 3D project artworks instead of a repeated generic placeholder.
 - Full case-study routes for Smart CCTV, Full-Stack Systems, and Developer Experiments.
 - A responsive technical-art direction built around black chrome, violet, and signal-lime.
@@ -23,6 +25,7 @@ The visual system is intentionally progressive rather than all-or-nothing:
 4. Device pixel ratio is capped at `1.5`; geometry is procedural and no multi-megabyte GLB is required.
 5. Project artwork is pre-compressed WebP (approximately 74–89 KB per source image) and delivered through `next/image` with AVIF/WebP negotiation.
 6. Off-screen sections use `content-visibility` to avoid unnecessary layout and paint work.
+7. GSAP is limited to one global reveal controller and the dynamically loaded 3D scene; it is not used to hijack scrolling.
 
 This produces a rich 3D impression while avoiding the cost of running several WebGL scenes or full-screen videos throughout the page.
 
@@ -42,6 +45,7 @@ This produces a rich 3D impression while avoiding the cost of running several We
 | Framework | Next.js 16 App Router |
 | UI | React 19, TypeScript |
 | 3D | Three.js, React Three Fiber, Drei |
+| Motion | GSAP, ScrollTrigger |
 | Icons | Lucide React |
 | Styling | Hand-authored CSS, responsive design tokens |
 | Rendering | Static generation for the home page and project case studies |
@@ -68,6 +72,7 @@ app/
   projects/[slug]/page.tsx    Statically generated case studies
 components/
   Experience.tsx              Navigation and interactive UI modules
+  MotionSystem.tsx            Reduced-motion-aware GSAP orchestration
   SystemCore.tsx              Lightweight procedural 3D scene
 lib/
   projects.ts                 Typed project content and artwork mapping
@@ -118,9 +123,9 @@ The project is compatible with Vercel's standard Next.js deployment flow:
 
 ## Design review
 
-The detailed before/after design, accessibility, responsiveness, and performance review is available in [AUDIT.md](AUDIT.md). The current implementation scored **45/50** in the repository's structured review, with remaining limitations documented rather than hidden.
+The detailed before/after design, accessibility, responsiveness, and performance review is available in [AUDIT.md](AUDIT.md). The current implementation scored **46/50** in the repository's structured review. Automated browser QA measured the desktop page at **6,834 px**, down from **18,981 px** before this compact redesign.
 
-Visual direction was informed by modern creative-studio portfolios, including Basement Studio's use of immersive worlds, oversized project presentation, and strong section rhythm. All code, compositions, project artwork, naming, and identity in this repository are original to this portfolio.
+Visual direction was informed by modern creative-studio portfolios and open-source 3D portfolios, especially Basement Studio for immersive scene-setting, CraftzDog for restraint, and Txema Albero for a persistent interactive object. All code, compositions, project artwork, naming, and identity in this repository are original to this portfolio. The accepted internal concept board is stored at `design/concepts/compact-orbital-portfolio.png`.
 
 ## License
 

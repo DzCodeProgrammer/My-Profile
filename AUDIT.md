@@ -1,56 +1,89 @@
 # Portfolio Design and Frontend Audit
 
-Audit date: **28 August 2026**<br>
-Preset: **Portfolio**<br>
-Surfaces reviewed: home page, selected-work section, project case study, mobile navigation<br>
+Audit date: **29 August 2026**
+
+Preset: **Compact orbital portfolio**
+
+Surfaces reviewed: home page, selected work, capability selector, lab, contact, mobile navigation
+
 Viewports: **1440 × 900** desktop and **390 × 844** mobile
 
 ## Executive review
 
-The portfolio now has a clear visual premise: an orbital software universe with one interactive core and three distinct project worlds. The strongest improvement is in selected work. Previously, every project repeated the same abstract ring and left large areas visually underdeveloped; the current version uses unique, compressed 3D artwork, alternating layouts, visible project status, and stronger content hierarchy.
+The portfolio keeps its strongest differentiator—the interactive orbital Three.js system—but no longer treats every content block like a full-screen poster. The home page now uses seven purposeful bands instead of a long sequence of oversized sections. Content sits inside a 1,240 px editorial grid, headings have a controlled hierarchy, technology is grouped by capability, projects use one featured plus two compact cards, and the terminal and system diagram share one workbench.
 
-Basement Studio was reviewed as a reference for principles, not copied as a template. Its useful lessons were immersive scene-setting, bold project scale, concrete descriptions, and deliberate rhythm. This implementation retains those principles while using an original technical identity and a substantially lighter rendering strategy.
+The redesign is an original synthesis rather than a visual copy. Basement Studio informed atmosphere and confidence; CraftzDog demonstrated how one signature 3D object can coexist with compact content; Txema Albero informed interactive-object continuity. The generated concept board was used for density, palette, and layout relationships only. Its fictional identity, location, experience, email, and project names were intentionally rejected.
 
 ## Scorecard
 
-Scores use a 1–5 scale, where 5 is release-quality for the chosen portfolio direction.
+Scores use a 1–5 scale, where 5 is release-quality for this portfolio direction.
 
-| Category | Before | Current | Evidence |
+| Category | Previous orbital | Current compact | Evidence |
 | --- | :---: | :---: | --- |
-| Visual hierarchy | 4 | 5 | Hero, manifesto, project titles, and calls to action have distinct scales and reading order. |
-| Layout and composition | 3 | 5 | Repeated project cards were replaced with alternating image-led worlds and tighter grid relationships. |
-| Typography | 4 | 4 | Monospace identity is consistent and expressive; the long personal name remains intentionally dense. |
-| Color and contrast | 4 | 4 | Violet and signal-lime guide attention on deep black; secondary microcopy is deliberately subdued. |
-| Interaction and motion | 4 | 4 | Drag-to-orbit hero, responsive menu, tool selector, terminal tabs, and restrained hover motion work coherently. |
-| Responsive design | 4 | 5 | Desktop uses interactive WebGL; mobile uses a purpose-built poster and stacked project composition with zero horizontal overflow. |
-| Accessibility | 3 | 4 | Focus states, alt text, Escape handling, reduced motion, menu state, and native-cursor fallback are present. |
-| Performance perception | 4 | 5 | WebGL is gated and paused; DPR is capped; project images are 74–89 KB WebP sources; off-screen sections are contained. |
-| Copy and credibility | 3 | 4 | Empty placeholder language was removed and unverified work remains transparently labelled Concept or Experiment. |
-| Craft and consistency | 3 | 5 | Hero, work, case studies, system diagrams, and contact now share one recognizable visual system. |
-| **Total** | **36/50** | **45/50** | **+9 points** |
+| Visual hierarchy | 3 | 5 | H1 is 61.92 px on desktop; section headings are 43–70 px and no longer compete with the hero. |
+| Layout and composition | 2 | 5 | A consistent 1,240 px grid replaces repeated full-width, full-height compositions. |
+| Typography | 3 | 5 | Display type is still expressive but body copy remains 11–13 px monospace with controlled line lengths. |
+| Color and contrast | 4 | 4 | Violet and signal-lime guide attention over black; some tertiary technical labels remain deliberately subdued. |
+| Interaction and motion | 4 | 5 | GSAP reveals, project parallax, WebGL entrance, orbit control, keyboard capability selection, terminal tabs, and mobile menu all work. |
+| Responsive design | 4 | 5 | No horizontal overflow at 1440 or 390 px; the mobile layout removes WebGL and stacks the content naturally. |
+| Accessibility | 4 | 4 | Focus styles, semantic sections, menu state, Escape handling, alt text, reduced motion, and native-cursor fallback are present. |
+| Performance perception | 4 | 5 | One gated desktop canvas, zero mobile canvases, capped DPR, compressed artwork, and no scroll hijacking. |
+| Copy and credibility | 4 | 4 | Verified identity and contact details are retained; projects remain honestly labelled Concept or Experiment. |
+| Craft and consistency | 4 | 4 | The orbital language is cohesive; real published project evidence remains the main missing layer. |
+| **Total** | **36/50** | **46/50** | **+10 points** |
+
+## Measured before and after
+
+| Metric | Before compact pass | Current | Change |
+| --- | ---: | ---: | ---: |
+| Desktop document height | 18,981 px | 6,834 px | −64% |
+| Primary display type | approximately 79–96 px | 43–70 px | controlled hierarchy |
+| Top-level content sections | 14 | 7 | −50% |
+| Desktop WebGL canvases | 1 | 1 | unchanged signature scene |
+| Mobile WebGL canvases | 0 | 0 | static optimized fallback |
+| Horizontal overflow | none | none | maintained |
+| Browser runtime errors | 0 | 0 | maintained |
+
+The mobile document is 10,215 px because all two- and four-column groups stack into one readable column. This is expected responsive flow, not oversized viewport sections; the mobile H1 is 42.9 px and only the hero has a fixed presentation height.
+
+## Motion and rendering strategy
+
+- GSAP ScrollTrigger reveals content once with a 28 px travel distance and `power3.out` easing.
+- Project images receive a subtle scroll-linked scale change; native page scrolling is preserved.
+- The Three.js world uses GSAP only for its initial scale and rotation entrance.
+- `prefers-reduced-motion` disables GSAP transforms, animated contact geometry, and interactive WebGL.
+- `Save-Data` and viewports below 900 px receive the 1,400 × 1,750 WebP hero fallback.
+- The desktop canvas pauses outside the hero and when the document is hidden; DPR is capped at 1.5.
+- Project images are 1,400 × 876 WebP sources and are lazy-loaded through `next/image`.
 
 ## Verification performed
 
 - `npm run lint`: passed with no TypeScript errors.
-- `npm run build`: passed; home, three project routes, sitemap, and robots file generated successfully.
-- Desktop browser QA: one WebGL canvas, no horizontal overflow, interactive orbit tested.
-- Mobile browser QA: static fallback used, no WebGL canvas, no horizontal overflow, menu open/close tested.
-- Image configuration: qualities `75` and `76` are configured; the reported Next Image warning is resolved.
-- Identity check: `dzcoding75` is absent and the current email is `dzikrijombang@gmail.com`.
+- `npm run build`: passed; eight static outputs generated, including three project case studies.
+- `npm audit`: passed with **0 vulnerabilities**.
+- Desktop browser QA: 1 canvas, 1,440 px content width, no horizontal overflow, no runtime errors.
+- Mobile browser QA: 0 canvases, 390 px content width, no horizontal overflow, no runtime errors.
+- Capability selector: keyboard focus + Enter changed the active readout to **AI & vision** and updated `aria-pressed` correctly.
+- Terminal tabs: TypeScript selection changed the active file to `future.ts`.
+- Mobile navigation: open state changed to `aria-expanded="true"`; Escape returned it to `false`.
+- Image configuration: qualities `75` and `76` are configured; the previous Next Image quality warning is absent.
+- Identity scan: the current email is `dzikrijombang@gmail.com`; no old `dzcoding75` identity remains in application content.
 
-## Performance comparison notes
+## Known non-blocking diagnostics
 
-In the same headless-browser inspection, Basement Studio transferred roughly 14 MB and used up to two canvases on desktop. This portfolio's local development capture transferred roughly 1.4 MB with one canvas. These figures are directional—not a lab-grade production benchmark—but they confirm the chosen architecture is materially lighter while keeping an immersive hero.
+1. Three.js emits a `THREE.Clock` deprecation warning from the installed React Three Fiber dependency stack. It does not originate in portfolio code and does not affect rendering.
+2. Headless Chromium reports a GPU `ReadPixels` stall while screenshots are captured. This is specific to the screenshot path and is not a page runtime exception.
+3. Automated browser checks cover layout and interactions, but a full assistive-technology matrix remains future work.
+4. Case studies still need verified repository links, live demos, outcomes, and measurements before they can be presented as shipped products.
 
-The project images added in this revision total less than 250 KB as source WebP files. The mobile hero fallback was reduced from approximately 1.3 MB PNG to approximately 73 KB WebP.
+## Reference review
 
-## Remaining limitations
-
-1. The case studies are concepts and experiments; verified demos, repository links, outcomes, and measurements should replace the current exploratory claims when available.
-2. The live procedural WebGL model intentionally has fewer reflections and environmental details than a pre-rendered hero concept. This is a conscious performance tradeoff.
-3. A deprecation warning for `THREE.Clock` originates inside the current Three/React Three Fiber dependency stack. It does not break rendering, but should be rechecked after future dependency upgrades.
-4. Accessibility was checked structurally and through keyboard-relevant interactions, but a full screen-reader matrix remains future work.
+- [Basement Studio](https://basement.studio/) — immersive scene-setting and confident art direction.
+- [CraftzDog homepage](https://github.com/craftzdog/craftzdog-homepage) — compact content with one lazy 3D signature object.
+- [Txema Albero portfolio](https://github.com/Txemalon/3d-portfolio) — persistent React Three Fiber interaction and Next.js structure.
+- [R3F portfolio by Arthur Panazolo](https://github.com/nothingnothings/r3f-portfolio) — full-scene navigation pattern used as a complexity comparison.
+- [Bruno Simon](https://bruno-simon.com/) — full 3D-world portfolio pattern, intentionally not adopted for this information-led site.
 
 ## Release recommendation
 
-**Ready to publish.** The build is stable, the presentation no longer feels empty, and the performance strategy is appropriate for a personal portfolio. The highest-value next improvement is real project evidence—not more decorative motion.
+**Ready to publish.** The redesign directly resolves the reported oversized text, excessive section height, and empty-feeling composition while preserving the distinctive 3D identity. The highest-value next improvement is verified project evidence, not additional decorative motion.

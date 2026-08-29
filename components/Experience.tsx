@@ -121,7 +121,7 @@ export function Hero() {
         <h1><span>HADRIAN</span><span>GALEN</span><span>DZIKRILLAH</span></h1>
         <div className="hero-roles"><span>Software Engineer</span><span>Full-Stack Developer</span><span>AI Enthusiast</span></div>
         <p className="hero-statement">I build digital experiences, intelligent systems, and software that turn ideas into reality.</p>
-        <div className="hero-actions"><a className="button primary" href="#about">Explore the system <ArrowDownRight /></a><a className="button text" href="https://github.com/DzCodeProgrammer" target="_blank" rel="noreferrer">GitHub <ArrowUpRight /></a></div>
+        <div className="hero-actions"><a className="button primary" href="#about">Explore the system <ArrowDownRight /></a><a className="button text" href="#projects">View projects <ArrowDownRight /></a></div>
         <div className="drag-cue"><span /><p>DRAG TO ORBIT</p></div>
       </div>
       <div className="system-index"><span><b>01</b> CORE</span><span>02 STACK</span><span>03 WORKFLOW</span><span>04 IMPACT</span></div>
@@ -158,15 +158,32 @@ function HeroSystem() {
   );
 }
 
-const stack = ["JavaScript", "TypeScript", "Python", "PHP", "React", "Next.js", "Vue", "Nuxt", "Laravel", "FastAPI", "Tailwind CSS", "Node.js", "PostgreSQL", "MySQL", "Supabase", "Docker", "Git", "GitHub", "OpenCV"];
+const capabilities = [
+  { name: "Frontend systems", summary: "Interfaces · interaction · product UI", tools: ["React", "Next.js", "Vue", "TypeScript"] },
+  { name: "Backend engineering", summary: "Services · APIs · application logic", tools: ["Node.js", "Laravel", "FastAPI", "PHP"] },
+  { name: "AI & vision", summary: "Intelligence · imaging · automation", tools: ["Python", "OpenCV", "AI Systems"] },
+  { name: "Data layer", summary: "Models · persistence · realtime data", tools: ["PostgreSQL", "MySQL", "Supabase"] },
+  { name: "Delivery", summary: "Versioning · containers · workflows", tools: ["Docker", "GitHub", "CI/CD"] },
+];
 
 export function TechOrbit() {
-  const [active, setActive] = useState("Python");
-  const detail: Record<string, string> = { Python: "AI · Computer Vision · Backend · Automation", TypeScript: "Interfaces · Systems · Tooling", React: "Product UI · Interaction · Components", Laravel: "Backend · APIs · Applications", OpenCV: "Vision · Imaging · Detection" };
+  const [active, setActive] = useState(0);
   return (
-    <div className="tech-orbit">
-      <div className="orbit-core"><span>SELECTED TOOL</span><strong>{active}</strong><p>{detail[active] || "Web Engineering · Software Systems"}</p></div>
-      <div className="tech-list">{stack.map((tech, i) => <button key={tech} className={active === tech ? "active" : ""} onMouseEnter={() => setActive(tech)} onFocus={() => setActive(tech)} onClick={() => setActive(tech)}><span>{String(i + 1).padStart(2, "0")}</span>{tech}</button>)}</div>
+    <div className="capability-system" data-reveal>
+      <div className="capability-readout" aria-live="polite">
+        <span>ACTIVE CAPABILITY / 0{active + 1}</span>
+        <strong>{capabilities[active].name}</strong>
+        <p>{capabilities[active].summary}</p>
+      </div>
+      <div className="capability-grid">
+        {capabilities.map((capability, index) => (
+          <button key={capability.name} className={active === index ? "active" : ""} onMouseEnter={() => setActive(index)} onFocus={() => setActive(index)} onClick={() => setActive(index)} aria-pressed={active === index}>
+            <span>0{index + 1}</span>
+            <h3>{capability.name}</h3>
+            <p>{capability.tools.join(" · ")}</p>
+          </button>
+        ))}
+      </div>
     </div>
   );
 }
@@ -182,7 +199,7 @@ export function CodeTerminal() {
 }
 
 export function ProjectGallery() {
-  return <div className="project-gallery">{projects.map((project) => <article key={project.slug} className="project-row" data-cursor="VIEW PROJECT">
+  return <div className="project-gallery">{projects.map((project, index) => <article key={project.slug} className={`project-card ${index === 0 ? "featured" : "compact"}`} data-cursor="VIEW PROJECT" data-reveal>
     <div className="project-copy">
       <div className="project-kicker"><span>{project.number}</span><span>{project.category}</span></div>
       <h3>{project.title}</h3>
@@ -191,7 +208,7 @@ export function ProjectGallery() {
       <Link href={`/projects/${project.slug}`}>View case study <ArrowUpRight /></Link>
     </div>
     <div className="project-visual" style={{ "--accent": project.accent } as React.CSSProperties}>
-      <Image src={project.image} alt={project.imageAlt} fill quality={75} sizes="(max-width: 900px) 100vw, 58vw" />
+      <Image src={project.image} alt={project.imageAlt} fill quality={75} sizes={index === 0 ? "(max-width: 900px) 100vw, 62vw" : "(max-width: 900px) 100vw, 50vw"} />
       <div className="project-scan" aria-hidden="true" />
       <div className="project-visual-top"><span>{project.signal}</span><span>{project.status}</span></div>
       <div className="project-visual-bottom"><span>{project.title}</span><b>{project.number}</b></div>
@@ -201,5 +218,5 @@ export function ProjectGallery() {
 
 export function Architecture() {
   const nodes = [["CLIENT","Interface"],["API","Orchestration"],["SERVICE","Application logic"],["DATABASE","Persistent data"],["AI ENGINE","Intelligence layer"]];
-  return <div className="architecture"><div className="arch-line"/>{nodes.map(([name, role], i) => <div className="arch-node" key={name}><span>0{i + 1}</span><strong>{name}</strong><p>{role}</p></div>)}</div>;
+  return <div className="architecture compact-architecture">{nodes.map(([name, role], i) => <div className="arch-node" key={name}><span>0{i + 1}</span><strong>{name}</strong><p>{role}</p></div>)}</div>;
 }
