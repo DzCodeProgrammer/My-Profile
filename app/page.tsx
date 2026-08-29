@@ -49,6 +49,14 @@ export default function Home() {
             <p>I build to understand problems, explore ideas, and turn complex systems into useful experiences.</p>
             <a href="#expertise">Explore the toolset <ArrowDownRight /></a>
           </div>
+          <div className="identity-console" aria-label="Developer identity summary">
+            <span>identity.ts</span>
+            <code><i>01</i> const identity = &#123;</code>
+            <code><i>02</i> name: <b>&quot;DzCodeProgrammer&quot;</b>,</code>
+            <code><i>03</i> focus: [<b>&quot;Web&quot;</b>, <b>&quot;AI&quot;</b>, <b>&quot;Systems&quot;</b>],</code>
+            <code><i>04</i> mindset: <b>&quot;Learn · Build · Iterate&quot;</b></code>
+            <code><i>05</i> &#125;;</code>
+          </div>
         </div>
         <div className="practice-grid">
           {practice.map(([period, title, copy], index) => (
@@ -102,13 +110,19 @@ export default function Home() {
       <section id="contact" className="contact compact-contact">
         <div className="contact-object" aria-hidden="true"><i /><i /><i /></div>
         <div className="contact-inner" data-reveal>
-          <span>05 / START A CONVERSATION</span>
-          <h2>Have an idea?<br /><em>Let&apos;s make it real.</em></h2>
-          <a className="contact-email" href="mailto:dzikrijombang@gmail.com">dzikrijombang@gmail.com <ArrowUpRight /></a>
-          <div className="contact-links">
-            <a href="mailto:dzikrijombang@gmail.com"><Mail />EMAIL</a>
-            <a href="https://www.linkedin.com/in/dzikri-e-979742335/" target="_blank" rel="noreferrer"><Linkedin />LINKEDIN</a>
-            <a href="https://github.com/DzCodeProgrammer" target="_blank" rel="noreferrer"><Github />GITHUB</a>
+          <div className="contact-copy">
+            <span>05 / START A CONVERSATION</span>
+            <h2>Have an idea?<br /><em>Let&apos;s make it real.</em></h2>
+            <p>I&apos;m open to collaborations, interesting problems, and conversations that build real value.</p>
+          </div>
+          <div className="contact-channels">
+            <span>DIRECT CHANNEL</span>
+            <a className="contact-email" href="mailto:dzikrijombang@gmail.com">dzikrijombang@gmail.com <ArrowUpRight /></a>
+            <div className="contact-links">
+              <a href="mailto:dzikrijombang@gmail.com"><Mail aria-hidden="true" />EMAIL</a>
+              <a href="https://www.linkedin.com/in/dzikri-e-979742335/" target="_blank" rel="noreferrer"><Linkedin aria-hidden="true" />LINKEDIN</a>
+              <a href="https://github.com/DzCodeProgrammer" target="_blank" rel="noreferrer"><Github aria-hidden="true" />GITHUB</a>
+            </div>
           </div>
         </div>
       </section>

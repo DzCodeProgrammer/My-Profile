@@ -101,6 +101,8 @@ function CoreWorld() {
 export default function SystemCore({ active }: { active: boolean }) {
   return (
     <Canvas
+      role="img"
+      aria-label="Interactive orbital software system. Drag to rotate."
       dpr={[1, 1.5]}
       frameloop={active ? "always" : "never"}
       camera={{ position: [0, 0, 7.2], fov: 43, near: .1, far: 50 }}

@@ -22,20 +22,19 @@ export function MotionSystem() {
         }, "-=.48");
 
       const reveals = gsap.utils.toArray<HTMLElement>("[data-reveal]");
-      gsap.set(reveals, { autoAlpha: 0, y: 14, force3D: true });
       ScrollTrigger.batch(reveals, {
-        start: "top 90%",
+        start: "top 92%",
         once: true,
         interval: .08,
         batchMax: 4,
-        onEnter: (batch) => gsap.to(batch, {
-          autoAlpha: 1,
-          y: 0,
-          duration: .62,
-          stagger: .04,
-          ease: "expo.out",
+        onEnter: (batch) => gsap.from(batch, {
+          autoAlpha: 0,
+          y: 12,
+          duration: .48,
+          stagger: .035,
+          ease: "power2.out",
           force3D: true,
-          overwrite: "auto",
+          clearProps: "opacity,visibility,transform",
         }),
       });
 

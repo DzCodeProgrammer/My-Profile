@@ -118,12 +118,14 @@ export function Hero() {
     <section id="home" className="hero">
       <HeroSystem />
       <div className="hero-content">
+        <p className="hero-kicker">// ENGINEER · BUILDER · PROBLEM SOLVER</p>
         <h1><span>HADRIAN</span><span>GALEN</span><span>DZIKRILLAH</span></h1>
         <div className="hero-roles"><span>Software Engineer</span><span>Full-Stack Developer</span><span>AI Enthusiast</span></div>
         <p className="hero-statement">I build digital experiences, intelligent systems, and software that turn ideas into reality.</p>
         <div className="hero-actions"><a className="button primary" href="#about">Explore the system <ArrowDownRight /></a><a className="button text" href="#projects">View projects <ArrowDownRight /></a></div>
         <div className="drag-cue"><span /><p>DRAG TO ORBIT</p></div>
       </div>
+      <div className="hero-code" aria-hidden="true"><span>const future = build();</span><span>ideas.connect(impact);</span></div>
       <div className="system-index"><span><b>01</b> CORE</span><span>02 STACK</span><span>03 WORKFLOW</span><span>04 IMPACT</span></div>
       <div className="hero-horizon"><span>// SYSTEM OVERVIEW</span></div>
     </section>
@@ -172,8 +174,12 @@ export function TechOrbit() {
     <div className="capability-system" data-reveal>
       <div className="capability-readout" aria-live="polite">
         <span>ACTIVE CAPABILITY / 0{active + 1}</span>
+        <div className="capability-orbit" aria-hidden="true"><i /><i /><i /></div>
         <strong>{capabilities[active].name}</strong>
         <p>{capabilities[active].summary}</p>
+        <div className="capability-tools">
+          {capabilities[active].tools.map((tool) => <span key={tool}>{tool}</span>)}
+        </div>
       </div>
       <div className="capability-grid">
         {capabilities.map((capability, index) => (
@@ -208,7 +214,7 @@ export function ProjectGallery() {
       <Link href={`/projects/${project.slug}`}>View case study <ArrowUpRight /></Link>
     </div>
     <div className="project-visual" style={{ "--accent": project.accent } as React.CSSProperties}>
-      <Image src={project.image} alt={project.imageAlt} fill quality={75} sizes={index === 0 ? "(max-width: 900px) 100vw, 62vw" : "(max-width: 900px) 100vw, 50vw"} />
+      <Image src={project.image} alt={project.imageAlt} fill quality={75} sizes={index === 0 ? "(max-width: 900px) 100vw, 62vw" : "(max-width: 600px) 32vw, (max-width: 900px) 50vw, (max-width: 1100px) 1px, 16vw"} />
       <div className="project-scan" aria-hidden="true" />
       <div className="project-visual-top"><span>{project.signal}</span><span>{project.status}</span></div>
       <div className="project-visual-bottom"><span>{project.title}</span><b>{project.number}</b></div>
@@ -218,5 +224,5 @@ export function ProjectGallery() {
 
 export function Architecture() {
   const nodes = [["CLIENT","Interface"],["API","Orchestration"],["SERVICE","Application logic"],["DATABASE","Persistent data"],["AI ENGINE","Intelligence layer"]];
-  return <div className="architecture compact-architecture">{nodes.map(([name, role], i) => <div className="arch-node" key={name}><span>0{i + 1}</span><strong>{name}</strong><p>{role}</p></div>)}</div>;
+  return <div className="architecture compact-architecture"><div className="architecture-route" aria-hidden="true" />{nodes.map(([name, role], i) => <div className="arch-node" key={name}><span>0{i + 1}</span><strong>{name}</strong><p>{role}</p></div>)}</div>;
 }
